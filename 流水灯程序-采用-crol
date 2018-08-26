@@ -1,0 +1,26 @@
+//思路：采用crol左移变量num；P1=num；先要P1=num这就会让第一个灯亮，然后左移，然后延时程序。
+//注意：因为要灯一直在移动状态，所以移动的程序需要放在大循环while（1）里面。
+
+#include<reg52.h>
+#include<intrins.h>
+#define uchar unsigned char
+#define uint unsigned int
+uint num;
+void delay(uint z)
+{
+	uint x,y;
+	for(x=z;x>0;x--)
+		for(y=110;y>0;y--);
+}
+void main()
+{
+	num=0xfe;
+	P1=num;
+	while(1)
+	{
+		P1=num;
+		delay(500);
+		num=_crol_(num,1);
+	}
+		
+}
